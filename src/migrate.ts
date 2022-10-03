@@ -181,6 +181,7 @@ async function fetchAppliedMigrationFromDB(
     appliedMigrations = rows
   } else {
     await client.query(`
+        CREATE SCHEMA IF NOT EXISTS ${migrationSchemaName};
         CREATE TABLE IF NOT EXISTS ${migrationSchemaName}.${migrationTableName} (
           id integer PRIMARY KEY,
           name varchar(100) UNIQUE NOT NULL,
